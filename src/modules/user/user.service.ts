@@ -7,6 +7,21 @@ import { PrismaService } from 'src/database/PrismaService';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
+
+  async findOne(id: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      include: { login: false }, // Incluir dados de login relacionados
+    });
+
+    if (!user) {
+      throw new Error(`User with ID ${id} not found`);
+    }
+
+    return user;
+  }
+
+
   async create(data: CreateUserDto) {
     const { name, email, password, birthday } = data;
   
