@@ -12,3 +12,20 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  birthday DateTime @db.Date
+  loginId  Int      @unique // Corrigir o tipo para Int
+  login    Login    @relation(name: "LoginToUser", fields: [loginId], references: [id], onDelete: Cascade)
+}
+
+model Login {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  user     User?  @relation(name: "LoginToUser")
+}
+
+
