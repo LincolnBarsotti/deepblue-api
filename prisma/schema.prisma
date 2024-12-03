@@ -43,3 +43,23 @@ model Incidente {
   Numero_de_fatalidades    Int
 }
 
+model Acidente {
+  id          Int       @id @default(autoincrement())
+  titulo      String
+  tipo        String
+  situacao    String
+  data        DateTime
+  horario     String
+  descricao   String
+  resolucao   Resolucao?
+}
+
+model Resolucao {
+  id           Int      @id @default(autoincrement())
+  responsavel  String
+  data         DateTime
+  descricao    String
+  custo_total  Float
+  acidenteId   Int      @unique
+  acidente     Acidente @relation(fields: [acidenteId], references: [id])
+}
