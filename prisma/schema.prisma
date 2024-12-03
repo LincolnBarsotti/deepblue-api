@@ -63,3 +63,12 @@ model Resolucao {
   acidenteId   Int      @unique
   acidente     Acidente @relation(fields: [acidenteId], references: [id])
 }
+
+model Noticia {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  descricao String
+  data      DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
