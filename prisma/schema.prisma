@@ -28,4 +28,18 @@ model Login {
   user     User?  @relation(name: "LoginToUser")
 }
 
+model Incidente {
+  id                        Int      @id @default(autoincrement())
+  Numero                   String
+  Empresa                  String
+  Data_de_criacao          DateTime @db.Date
+  Autoridades_comunicadas  String?
+  Instalacao               String
+  Data_da_primeira_observacao DateTime @db.Date
+  Hora_da_primeira_observacao String
+  Data_estimada_do_incidente DateTime @db.Date
+  Hora_do_incidente        String
+  Numero_de_feridos_graves Int
+  Numero_de_fatalidades    Int
+}
 
